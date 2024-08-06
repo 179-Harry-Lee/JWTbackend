@@ -8,6 +8,8 @@ const initWebRoutes = (app) => {
 
   router.get("/user", homeController.handleUserPage);
 
+  router.post("/user/create-user", homeController.handleCreateNewUser);
+
   router.use((req, res, next) => {
     res.status(404).send("Page Not Found");
   });
