@@ -16,7 +16,7 @@ const hashUserPassword = (userPassword) => {
 const createNewUser = (email, password, username) => {
   let hashPassword = hashUserPassword(password);
   connection.query(
-    "INSERT INTO users (email, password ,username) VALUES (?,?,?)",
+    "INSERT INTO user (email, password ,username) VALUES (?,?,?)",
     [email, hashPassword, username],
     function (err, results, fields) {
       if (err) {
@@ -27,8 +27,8 @@ const createNewUser = (email, password, username) => {
 };
 
 const getUserList = () => {
-  let users = [];
-  connection.query("SELECT * FROM users ", function (err, results, fields) {
+  let user = [];
+  connection.query("SELECT * FROM user ", function (err, results, fields) {
     if (err) {
       console.log("Error inserting user: ", err);
     }
