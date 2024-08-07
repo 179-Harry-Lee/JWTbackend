@@ -4,11 +4,17 @@ import configViewEngine from "./config/viewEngine";
 
 import initWebRoutes from "./routes/web";
 
+import bodyParser, { json } from "body-parser";
+
 require("dotenv").config();
 
 const app = express();
 
 const PORT = process.env.PORT || 8080;
+
+//body parser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // config view engine
 configViewEngine(app);

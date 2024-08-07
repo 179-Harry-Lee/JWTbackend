@@ -1,9 +1,17 @@
 import express from "express";
-
+import homeController from "../controller/homeController";
 const router = express.Router();
+
 const initWebRoutes = (app) => {
-  router.get("/", (req, res) => {
-    return res.send("Welcome to the web server!");
+  //path,handler
+  router.get("/", homeController.handleHelloWorld);
+
+  router.get("/user", homeController.handleUserPage);
+
+  router.post("/user/create-user", homeController.handleCreateNewUser);
+
+  router.use((req, res, next) => {
+    res.status(404).send("Page Not Found");
   });
 
   return app.use("/", router);
