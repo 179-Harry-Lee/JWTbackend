@@ -16,7 +16,7 @@ const hashUserPassword = (userPassword) => {
 const createNewUser = (email, password, username) => {
   let hashPassword = hashUserPassword(password);
   connection.query(
-    "INSERT INTO users (email, password,username) VALUES (?,?,?)",
+    "INSERT INTO users (email, password ,username) VALUES (?,?,?)",
     [email, hashPassword, username],
     function (err, results, fields) {
       if (err) {
