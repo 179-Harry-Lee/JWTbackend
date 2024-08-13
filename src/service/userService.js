@@ -1,5 +1,6 @@
 import bcrypt from "bcryptjs";
 import mysql from "mysql2";
+import db from "../models";
 const salt = bcrypt.genSaltSync(10);
 
 // Create the connection to database
@@ -13,27 +14,24 @@ const hashUserPassword = (userPassword) => {
   return bcrypt.hashSync(userPassword, salt);
 };
 
-const createNewUser = (email, password, username) => {
+const createNewUser = async (email, password, username) => {
   let hashPassword = hashUserPassword(password);
-  connection.query(
-    "INSERT INTO user (email, password ,username) VALUES (?,?,?)",
-    [email, hashPassword, username],
-    function (err, results, fields) {
-      if (err) {
-        console.log("Error inserting user: ", err);
-      }
-    }
-  );
+
+  try {
+    await db.User.create({
+      email: email,
+      password: hashPassword,
+      username: username,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-const getUserList = () => {
+const getUserList = async () => {
   let user = [];
-  connection.query("SELECT * FROM user ", function (err, results, fields) {
-    if (err) {
-      console.log("Error inserting user: ", err);
-    }
-    console.log(results);
-  });
+  user = await db.User.findAll();
+  return user;
 };
 
 module.exports = {
