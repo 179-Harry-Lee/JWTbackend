@@ -1,5 +1,6 @@
 import express from "express";
 import homeController from "../controller/homeController";
+import apiController from "../controller/apiController";
 const router = express.Router();
 
 const initWebRoutes = (app) => {
@@ -9,6 +10,8 @@ const initWebRoutes = (app) => {
   router.get("/user", homeController.handleUserPage);
 
   router.post("/user/create-user", homeController.handleCreateNewUser);
+
+  router.get("/api/test-api", apiController.testAPI);
 
   router.use((req, res, next) => {
     res.status(404).send("Page Not Found");
