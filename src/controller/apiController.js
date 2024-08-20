@@ -4,6 +4,12 @@ const testAPI = (req, res) => {
     data: "test API",
   });
 };
+
+const handleRegister = (req, res) => {
+  console.log("call me", req.body);
+};
+
 module.exports = {
   testAPI,
+  handleRegister,
 };

@@ -1,7 +1,9 @@
 import express from "express";
 import configViewEngine from "./config/viewEngine";
 import initWebRoutes from "./routes/web";
+import initApiRoutes from "./routes/api";
 import bodyParser, { json } from "body-parser";
+import configCors from "./config/cors";
 require("dotenv").config();
 // import connection from "./config/connectDB";
 
@@ -9,16 +11,8 @@ const app = express();
 
 const PORT = process.env.PORT || 8080;
 
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", process.env.REACT_URL);
-  res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE");
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With,content-type"
-  );
-  res.setHeader("Access-Control-Allow-Credentials", true);
-  next();
-});
+//config cors
+configCors(app);
 
 //body parser
 app.use(bodyParser.json());
@@ -32,6 +26,7 @@ configViewEngine(app);
 
 // init web routes
 initWebRoutes(app);
+initApiRoutes(app);
 
 app.listen(PORT, () => {
   console.log(`JWT backend is running on port http://localhost:${PORT}/`);
