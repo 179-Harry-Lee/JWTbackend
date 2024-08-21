@@ -34,14 +34,14 @@ const registerNewUser = async (rawUserData) => {
     if (isEmailExist === true) {
       return {
         EM: "Email is already exist",
-        EC: 1,
+        EC: "1",
       };
     }
     let isPhoneExist = await checkPhoneExist(rawUserData.phone);
     if (isPhoneExist === true) {
       return {
-        EM: "Email is already exist",
-        EC: 1,
+        EM: "Phone is already exist",
+        EC: "1",
       };
     }
 
@@ -55,12 +55,12 @@ const registerNewUser = async (rawUserData) => {
     });
     return {
       EM: "User registered successfully",
-      EC: 0,
+      EC: "0",
     };
   } catch (error) {
     return {
       EM: "Somthing was wrong in  loginRegisterService",
-      EC: -2,
+      EC: "-2",
     };
   }
 };
