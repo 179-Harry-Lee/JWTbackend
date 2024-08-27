@@ -21,7 +21,7 @@ const checkEmailExist = async (userEmail) => {
 
 const checkPhoneExist = async (userPhone) => {
   let user = await db.User.findOne({
-    where: { email: userPhone },
+    where: { phone: userPhone },
   });
   if (user) {
     return true;
@@ -109,4 +109,10 @@ const handleUserLogin = async (rawData) => {
   }
 };
 
-module.exports = { registerNewUser, handleUserLogin };
+module.exports = {
+  registerNewUser,
+  handleUserLogin,
+  hashUserPassword,
+  checkEmailExist,
+  checkPhoneExist,
+};
