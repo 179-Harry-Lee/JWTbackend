@@ -1,10 +1,11 @@
+require("dotenv").config();
 import express from "express";
 import configViewEngine from "./config/viewEngine";
 import initWebRoutes from "./routes/web";
 import initApiRoutes from "./routes/api";
 import bodyParser, { json } from "body-parser";
 import configCors from "./config/cors";
-require("dotenv").config();
+import cookieParser from "cookie-parser";
 
 const app = express();
 
@@ -17,8 +18,8 @@ configCors(app);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//test connection DB
-// connection();
+//config cookie-parser
+app.use(cookieParser());
 
 // config view engine
 configViewEngine(app);
