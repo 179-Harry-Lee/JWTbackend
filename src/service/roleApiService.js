@@ -102,4 +102,30 @@ const getRoleByGroup = async (id) => {
     };
   }
 };
-module.exports = { createNewRoles, getAllRoles, deleteRole, getRoleByGroup };
+
+const assignRoleToGroup = async (data) => {
+  try {
+    // {groupId: 4 , groupRoles: [{},{}]}
+    await db.Group_Role.destroy({ where: { groupId: +data.groupId } });
+    await db.Group_Role.bulkCreate(data.groupRoles);
+    return {
+      EM: "Assign role to group success",
+      EC: 0,
+      DT: [],
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      EM: "Something wrong with roleApiService: ",
+      EC: 1,
+      DT: [],
+    };
+  }
+};
+module.exports = {
+  createNewRoles,
+  getAllRoles,
+  deleteRole,
+  getRoleByGroup,
+  assignRoleToGroup,
+};
