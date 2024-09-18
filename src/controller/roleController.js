@@ -94,8 +94,6 @@ const getRoleByGroup = async (req, res) => {
 
 const assignRoleToGroup = async (req, res) => {
   try {
-    console.log("check body:", req.body.data);
-
     let data = await roleApiService.assignRoleToGroup(req.body.data);
     return res.status(200).json({
       EM: data.EM,
