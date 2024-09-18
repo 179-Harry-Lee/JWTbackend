@@ -14,6 +14,7 @@ const handleCreateNewUser = (req, res) => {
   let username = req.body.username;
 
   // userService.createNewUser(email, password, username);
+
   userService.getUserList();
 
   return res.send("handle create new user");
